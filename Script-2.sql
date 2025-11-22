@@ -35,3 +35,6 @@ WHERE student_id = 2;
 DELETE FROM Student WHERE student_id = 6
 
 SELECT student_id, name, group_name, email FROM Student;
+
+SELECT subject_id, name FROM Subject;
+

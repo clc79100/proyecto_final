@@ -1,0 +1,30 @@
+###
+GET http://localhost:3000/students/
+
+
+###
+GET http://localhost:3000/students/8
+
+###
+POST  http://localhost:3000/students/
+Content-Type: application/json
+
+{
+    "name":"Carlos N",
+    "group_name":"C",
+    "email":"carlos2@gmail.com"
+}
+
+###
+PUT  http://localhost:3000/students/8
+Content-Type: application/json
+
+{
+    "name":"Alberto",
+    "group_name":"B",
+    "email":"nuevo@gmail.com"
+}
+
+
+###
+DELETE http://localhost:3000/students/8

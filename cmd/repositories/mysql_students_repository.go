@@ -3,7 +3,6 @@ package repositories
 import (
 	"database/sql"
 	"errors"
-	"log"
 
 	"proyecto_final/cmd/models"
 )
@@ -19,7 +18,6 @@ func NewMySQLStudentRepository(db *sql.DB) *MySQLStudentRepository {
 func (r *MySQLStudentRepository) GetAll() ([]models.Student, error) {
 	rows, err := r.db.Query("SELECT student_id, name, group_name, email FROM Student;")
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 

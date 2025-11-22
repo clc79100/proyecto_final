@@ -15,29 +15,9 @@ func NewMySQLSubjectRepository(db *sql.DB) *MYSQLSubjectRepository {
 	return &MYSQLSubjectRepository{db: db}
 }
 
-func (r *MYSQLSubjectRepository) GetAll() ([]models.Subject, error) {
-	rows, err := r.db.Query("SELECT subject_id, name FROM Subject;")
-	if err != nil {
-		return nil, err
-	}
-
-	defer rows.Close()
-
-	var subjects []models.Subject
-	for rows.Next() {
-		var subject models.Subject
-		err := rows.Scan(&subject.SubjectID, &subject.Name)
-		if err != nil {
-			return nil, err
-		}
-		subjects = append(subjects, subject)
-	}
-	return subjects, nil
-}
-
 func (r *MYSQLSubjectRepository) GetByID(id int) (models.Subject, error) {
 	var subject models.Subject
-	row := r.db.QueryRow("SELECT * subject_id, name FROM Subject WHERE subject_id = ?;", subject.SubjectID)
+	row := r.db.QueryRow("SELECT subject_id, name FROM Subject WHERE subject_id = ?;", id)
 	err := row.Scan(&subject.SubjectID, &subject.Name)
 	if err != nil {
 		if err == sql.ErrNoRows {

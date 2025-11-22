@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -48,14 +47,13 @@ func (h *StudentHandler) CreateStudent(w http.ResponseWriter, r *http.Request) {
 	var student models.Student
 	err := json.NewDecoder(r.Body).Decode(&student)
 	if err != nil {
-		http.Error(w, "Invalid request payload", http.StatusInternalServerError)
+		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
 	}
 
 	createdStudent, err := h.repo.Create(student)
 	if err != nil {
 		http.Error(w, "Failed to create Student", http.StatusInternalServerError)
-		log.Println(err.Error())
 		return
 	}
 
@@ -74,14 +72,13 @@ func (h *StudentHandler) UpdateStudent(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewDecoder(r.Body).Decode(&student)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
 	}
 
 	updatedStudent, err := h.repo.Update(id, student)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
 
@@ -94,11 +91,13 @@ func (h *StudentHandler) DeleteStudent(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(r.PathValue("id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	err = h.repo.Delete(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")

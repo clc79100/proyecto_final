@@ -12,7 +12,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-// ...
 func main() {
 	db, err := sql.Open("mysql", "root:Password1@tcp(127.0.0.1:3306)/School")
 	if err != nil {

@@ -1,0 +1,27 @@
+###
+GET http://localhost:3000/grades/students/1
+
+###
+GET http://localhost:3000/grades/5/students/1
+
+
+###
+POST  http://localhost:3000/grades/
+Content-Type: application/json
+
+{
+    "student_id":1,
+    "subject_id":3,
+    "grade":8.644
+}
+
+###
+PUT  http://localhost:3000/grades/5
+Content-Type: application/json
+
+{
+    "grade":5.6
+}
+
+###
+DELETE http://localhost:3000/grades/5

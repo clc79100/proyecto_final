@@ -1,0 +1,22 @@
+###
+GET http://localhost:3000/subjects/1
+
+###
+POST  http://localhost:3000/subjects/
+Content-Type: application/json
+
+{
+    "name":"Ciencias"
+}
+
+###
+PUT  http://localhost:3000/subjects/5
+Content-Type: application/json
+
+{
+    "name":"Ciencias Naturales"
+}
+
+
+###
+DELETE http://localhost:3000/subjects/5
